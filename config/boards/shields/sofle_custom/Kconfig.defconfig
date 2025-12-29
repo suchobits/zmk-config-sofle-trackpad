@@ -1,0 +1,40 @@
+if SHIELD_SOFLE_CUSTOM_LEFT || SHIELD_SOFLE_CUSTOM_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "Sofle Custom"
+
+config ZMK_SPLIT
+    default y
+
+endif
+
+# RIGHT side is CENTRAL because it has the trackpad
+if SHIELD_SOFLE_CUSTOM_RIGHT
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+# Enable pointing device support on central (right side)
+config ZMK_POINTING
+    default y
+
+# Enable I2C for trackpad
+config I2C
+    default y
+
+endif
+
+if SHIELD_SOFLE_CUSTOM_LEFT || SHIELD_SOFLE_CUSTOM_RIGHT
+
+# Enable RGB underglow
+config ZMK_RGB_UNDERGLOW
+    default y
+
+# Enable encoder support
+config EC11
+    default y
+
+config EC11_TRIGGER_GLOBAL_THREAD
+    default y
+
+endif

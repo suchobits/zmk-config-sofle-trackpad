@@ -1,0 +1,56 @@
+#include "sofle_custom.dtsi"
+#include <dt-bindings/zmk/matrix_transform.h>
+
+&kscan0 {
+    col-gpios
+        = <&pro_micro 10 GPIO_ACTIVE_HIGH>  // COL6
+        , <&pro_micro 16 GPIO_ACTIVE_HIGH>  // COL7
+        , <&pro_micro 14 GPIO_ACTIVE_HIGH>  // COL8
+        , <&pro_micro 15 GPIO_ACTIVE_HIGH>  // COL9
+        , <&pro_micro 18 GPIO_ACTIVE_HIGH>  // COL10
+        , <&pro_micro 19 GPIO_ACTIVE_HIGH>  // COL11
+        ;
+
+    row-gpios
+        = <&pro_micro 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW0
+        , <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW1
+        , <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW2
+        , <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW3
+        ;
+};
+
+&right_encoder {
+    status = "okay";
+};
+
+// I2C configuration for HolyKeebs trackpad module
+// Uses P0.17 (SDA) and P0.20 (SCL) - your exact pins!
+&pro_micro_i2c {
+    status = "okay";
+    
+    tps43: iqs5xx@74 {
+        compatible = "azoteq,iqs5xx";
+        status = "okay";
+        reg = <0x74>;
+        
+        // HolyKeebs module handles RESET and RDY internally
+        // Only SDA (P0.17) and SCL (P0.20) are connected
+        
+        // Trackpad settings for TPS43
+        azoteq,suspend-mode = <2>;
+        azoteq,xy-res = <2048 1792>;  // TPS43 resolution
+        
+        // Uncomment if trackpad orientation is wrong:
+        // azoteq,flip-x;     // Flip horizontal
+        // azoteq,flip-y;     // Flip vertical  
+        // azoteq,switch-xy;  // Rotate 90 degrees
+    };
+};
+
+// Input listener for the trackpad
+/ {
+    tps43_listener: tps43_listener {
+        compatible = "zmk,input-listener";
+        device = <&tps43>;
+    };
+};
