@@ -8,10 +8,22 @@ config ZMK_SPLIT
 
 endif
 
+# LEFT side is PERIPHERAL
+if SHIELD_SOFLE_CUSTOM_LEFT
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default n
+
+endif
+
 # RIGHT side is CENTRAL because it has the trackpad
 if SHIELD_SOFLE_CUSTOM_RIGHT
 
 config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+# Enable USB on central
+config ZMK_USB
     default y
 
 # Enable pointing device support on central (right side)
