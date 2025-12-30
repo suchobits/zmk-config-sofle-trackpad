@@ -14,6 +14,9 @@ if SHIELD_SOFLE_CUSTOM_LEFT
 config ZMK_SPLIT_ROLE_CENTRAL
     default n
 
+config ZMK_USB
+    default n
+
 endif
 
 # RIGHT side is CENTRAL because it has the trackpad
