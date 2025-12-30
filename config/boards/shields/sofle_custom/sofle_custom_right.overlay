@@ -32,12 +32,11 @@
         compatible = "azoteq,iqs5xx";
         status = "okay";
         reg = <0x74>;
-        
+
         // HolyKeebs module handles RESET and RDY internally
         // Only SDA (P0.17) and SCL (P0.20) are connected
-        
+
         // Trackpad settings for TPS43
-        azoteq,suspend-mode = <2>;
         azoteq,xy-res = <2048 1792>;  // TPS43 resolution
         
         // Uncomment if trackpad orientation is wrong:
