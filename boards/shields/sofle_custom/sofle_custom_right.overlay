@@ -38,10 +38,11 @@
 
         // Trackpad settings for TPS43
         azoteq,xy-res = <2048 1792>;  // TPS43 resolution
-        
+        azoteq,suspend-mode = <2>;    // Power management: 0=none, 1=auto, 2=low-power
+
         // Uncomment if trackpad orientation is wrong:
         // azoteq,flip-x;     // Flip horizontal
-        // azoteq,flip-y;     // Flip vertical  
+        // azoteq,flip-y;     // Flip vertical
         // azoteq,switch-xy;  // Rotate 90 degrees
     };
 };
